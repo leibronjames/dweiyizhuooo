@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Card with Cat Clicker</title>
+<style>
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  .ecard {
+    width: 90%;
+    max-width: 700px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+
+  /* 4-picture auto-fit layout */
+  .image-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    padding: 10px;
+  }
+
+  .image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid #e2e8f0;
+  }
+
+  /* Text Content */
+  .text-content {
+    padding: 20px;
+  }
+
+  h2 {
+    margin: 0;
+    color: #1e293b;
+  }
+
+  p {
+    color: #475569;
+    line-height: 1.5;
+  }
+
+  .meta {
+    font-size: 12px;
+    color: #94a3b8;
+    text-align: right;
+    margin-top: 8px;
+  }
+
+  /* Cat Clicker Section */
+  .clicker {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #e2e8f0;
+    background: #f9fafb;
+    position: relative;
+    z-index: 1;
+  }
+
+  #cat {
+    width: 120px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: transform 0.2s;
+  }
+
+  /* Cat click animation */
+  #cat.click-animate {
+    transform: scale(1.2);
+  }
+
+  /* Hidden message */
+  #msg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255,255,255,0.95);
+    border: 2px solid #2563eb;
+    padding: 25px 40px;
+    border-radius: 12px;
+    font-size: 24px;
+    color: #111;
+    display: none;
+    text-align: center;
+    z-index: 999;
+  }
+
+  @media screen and (max-width: 600px) {
+    .image-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .image-container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="ecard">
+
+  <!-- 4 pictures -->
+  <div class="image-container">
+    <img src="pic1.jpg" alt="photo 1">
+    <img src="pic2.jpg" alt="photo 2">
+    <img src="pic3.jpg" alt="photo 3">
+    <img src="pic4.jpg" alt="photo 4">
+  </div>
+
+  <div class="text-content">
+    <h2>Hello Aeri</h2>
+    <p>I KNOW HINDI KANA NAIINIS PERO PARA MAS MAWALA PA</p>
+  
+  </div>
+
+  <!-- Mini-game: Cat Clicker -->
+  <div class="clicker">
+    <h3>click mo ang posa</h3>
+    <p></p>
+    <img id="cat" src="cat_normal.jpg" alt="cat">
+  </div>
+</div>
+
+<div id="msg">aeri ganda palo mag gosayon</div>
+
+<script>
+  let clicks = 0;
+  const cat = document.getElementById('cat');
+  const msg = document.getElementById('msg');
+
+  cat.addEventListener('click', () => {
+    clicks++;
+
+    // Cat click bounce animation
+    cat.classList.add('click-animate');
+    setTimeout(() => cat.classList.remove('click-animate'), 150);
+
+    // Show message after 30 clicks
+    if (clicks === 30) {
+      msg.style.display = 'block';
+    }
+  });
+</script>
+
+</body>
+</html>
